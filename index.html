@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To-Do List Elegan 3D</title>
+
+  <!-- Tailwind (dengan prefix supaya tidak tabrakan) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      prefix: 'tw-',  /* Prefix semua class Tailwind */
+      theme: {
+        extend: {
+          colors: {
+            primary: '#3498db',
+            secondary: '#6dd5fa',
+            danger: '#e74c3c',
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- CSS Custom -->
+  <link rel="stylesheet" href="css/style.css">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="tw-bg-gradient-to-r tw-from-cyan-200 tw-to-blue-400 tw-min-h-screen tw-flex tw-justify-center tw-items-start tw-pt-10">
+
+  <!-- Container Utama -->
+  <div class="container tw-shadow-2xl tw-backdrop-blur-lg tw-w-full tw-max-w-2xl tw-p-6">
+    <h1 class="tw-text-center tw-text-white tw-font-bold tw-text-3xl tw-mb-6 tw-tracking-wider">To-Do Tugas</h1>
+
+    <!-- Ringkasan -->
+    <div class="summary-container tw-grid tw-grid-cols-2 md:tw-grid-cols-4 tw-gap-4 tw-mb-6">
+      <div class="summary-item">
+        <span>Total Tugas</span>
+        <span id="total-tasks" class="summary-value">0</span>
+      </div>
+      <div class="summary-item">
+        <span>Selesai</span>
+        <span id="completed-tasks" class="summary-value">0</span>
+      </div>
+      <div class="summary-item">
+        <span>Tunda</span>
+        <span id="pending-tasks" class="summary-value">0</span>
+      </div>
+      <div class="summary-item">
+        <span>Progress</span>
+        <span id="progress-percent" class="summary-value">0%</span>
+      </div>
+    </div>
+
+    <!-- Form Tambah Tugas -->
+    <form id="todo-form" class="tw-space-y-4">
+      <div class="input-group">
+        <input type="text" id="todo-input" placeholder="Tambah tugas baru...">
+        <div class="date-input-wrapper">
+          <input type="date" id="date-input" placeholder=" ">
+          <span class="date-placeholder" id="date-placeholder">Pilih Tanggal</span>
+        </div>
+      </div>
+
+      <div class="button-group">
+        <button type="submit" id="add-btn" class="form-btn">
+          <i class="fas fa-plus"></i> Add Tugas
+        </button>
+        <button type="button" id="update-btn" class="form-btn" style="display: none;">
+          <i class="fas fa-edit"></i> Update Tugas
+        </button>
+        <button type="button" id="delete-all-btn">
+          <i class="fas fa-trash-alt"></i> Delete All
+        </button>
+      </div>
+    </form>
+
+    <!-- Filter -->
+    <div class="filters tw-mt-6 tw-space-y-4">
+      <!-- Filter Status -->
+      <div class="filter-group">
+        <label for="filter-select" class="tw-font-semibold tw-text-white">Filter Status:</label>
+        <select id="filter-select" class="tw-ml-2 tw-rounded-md tw-border tw-border-gray-300 tw-px-2 tw-py-1">
+          <option value="all">All</option>
+          <option value="pending">Tunda</option>
+          <option value="completed">Selesai</option>
+        </select>
+        <button type="button" id="filter-status-btn" class="form-btn">Filter</button>
+        <button type="button" id="reset-status-btn" class="form-btn">Reset</button>
+      </div>
+
+      <!-- Filter Tanggal -->
+      <div class="filter-group">
+        <label for="filter-date-start" class="tw-font-semibold tw-text-white">Dari:</label>
+        <input type="date" id="filter-date-start" class="tw-rounded-md tw-border tw-border-gray-300 tw-px-2 tw-py-1">
+
+        <label for="filter-date-end" class="tw-ml-2 tw-font-semibold tw-text-white">Sampai:</label>
+        <input type="date" id="filter-date-end" class="tw-rounded-md tw-border tw-border-gray-300 tw-px-2 tw-py-1">
+
+        <button type="button" id="filter-date-btn" class="form-btn">Filter</button>
+        <button type="button" id="reset-date-btn" class="form-btn">Reset</button>
+      </div>
+    </div>
+
+    <!-- Daftar Tugas -->
+    <ul id="todo-list" class="tw-mt-6"></ul>
+
+    <!-- Tabel Tugas -->
+    <div id="task-table-wrapper" style="display: none;">
+      <table id="task-table" class="tw-w-full tw-rounded-lg tw-overflow-hidden">
+        <thead>
+          <tr>
+            <th>No</th>
+            <th>Nama Tugas</th>
+            <th>Tanggal</th>
+            <th>Status</th>
+            <th>Aksi</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Data tugas akan diisi oleh JavaScript -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Script -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="js/script.js"></script>
+
+</body>
+</html>
